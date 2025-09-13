@@ -228,12 +228,7 @@
     }
   },
   "security": [
-    {
-      "UserAuthenticationToken": []
-    },
-    {
-      "ApplicationKey": []
-    }
+    { "ApplicationKey": [] }
   ],
   "components": {
     "securitySchemes": {
@@ -1252,38 +1247,47 @@
         ]
       },
       "ArticleCreate": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ArticleBase"
-          },
-          {
-            "type": "object",
-            "required": [
-              "title",
-              "templateType",
-              "world"
-            ],
-            "properties": {
-              "title": {
-                "type": "string"
-              },
-              "world": {
-                "$ref": "#/components/schemas/WorldRef"
-              }
-            }
-          }
-        ]
+        "type": "object",
+        "required": ["title", "templateType", "world"],
+        "properties": {
+          "title": { "type": "string" },
+          "templateType": { "type": "string", "enum": [
+            "generic","location","settlement","organization","person","rank","vehicle","tradition","religion","deity","item","technology","species","creature","flora","fauna","spell","magic","militaryUnit","building","structure","profession","myth","legend","historicalEvent","timelineEntry","geography","landform","document","manuscript","law","language","material","condition","disease","food","cuisine"
+          ]},
+          "world": { "$ref": "#/components/schemas/WorldRef" },
+          "category": { "$ref": "#/components/schemas/CategoryRef" },
+          "state": { "type": "string", "enum": ["public","private"], "default": "private" },
+          "excerpt": { "type": "string" },
+          "content": { "type": "string" },
+          "sidebarcontent": { "type": "string" },
+          "authornotes": { "type": "string" },
+          "tags": { "type": "string" },
+          "cover": { "$ref": "#/components/schemas/ImageRef" }
+        },
+        "description": "Payload to create an article. Template-specific fields may also be supplied and will be validated against the chosen templateType variant."
       },
       "ArticleUpdate": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ArticleBase"
-          },
-          {
-            "type": "object",
-            "description": "All fields optional."
-          }
-        ]
+        "type": "object",
+        "description": "Partial update of an article. Supply only the fields that need to change.",
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "title": { "type": "string" },
+          "templateType": { "type": "string", "enum": [
+            "generic","location","settlement","organization","person","rank","vehicle","tradition","religion","deity","item","technology","species","creature","flora","fauna","spell","magic","militaryUnit","building","structure","profession","myth","legend","historicalEvent","timelineEntry","geography","landform","document","manuscript","law","language","material","condition","disease","food","cuisine"
+          ]},
+          "world": { "$ref": "#/components/schemas/WorldRef" },
+          "category": { "$ref": "#/components/schemas/CategoryRef" },
+          "state": { "type": "string", "enum": ["public","private"] },
+          "excerpt": { "type": "string" },
+          "content": { "type": "string" },
+          "sidebarcontent": { "type": "string" },
+          "authornotes": { "type": "string" },
+          "footnotes": { "type": "string" },
+          "tags": { "type": "string" },
+          "cover": { "$ref": "#/components/schemas/ImageRef" },
+          "isDraft": { "type": "boolean" },
+          "isWip": { "type": "boolean" }
+        }
       },
       "Article": {
         "oneOf": [
