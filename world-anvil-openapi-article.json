@@ -6,88 +6,1484 @@
     "description": "Reduced specification containing only Article endpoints (GET/PUT/PATCH/DELETE /article and POST /world/articles)."
   },
   "servers": [
-    {"url": "https://www.worldanvil.com/api/external/boromir", "description": "Primary Server"}
+    {
+      "url": "https://www.worldanvil.com/api/external/boromir",
+      "description": "Primary Server"
+    }
   ],
-  "tags": [ {"name": "Article"} ],
+  "tags": [
+    {
+      "name": "Article"
+    }
+  ],
   "paths": {
     "/article": {
       "get": {
-        "tags": ["Article"],
+        "tags": [
+          "Article"
+        ],
         "summary": "Read Article",
         "operationId": "readArticle",
         "parameters": [
-          {"name": "id", "in": "query", "required": true, "schema": {"type": "string", "format": "uuid"}},
-          {"name": "granularity", "in": "query", "required": false, "schema": {"type": "integer", "enum": [-1,0,1,2,3], "default": 0}}
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "granularity",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                -1,
+                0,
+                1,
+                2,
+                3
+              ],
+              "default": 0
+            }
+          }
         ],
         "responses": {
-          "200": {"description": "Article resource", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Article"}}}},
-          "404": {"description": "Article not found"}
+          "200": {
+            "description": "Article resource",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Article not found"
+          }
         }
       },
       "put": {
-        "tags": ["Article"],
+        "tags": [
+          "Article"
+        ],
         "summary": "Create Article",
         "operationId": "createArticle",
-        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ArticleCreate"}}}},
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticleCreate"
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {"description": "Created article", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Article"}}}},
-          "400": {"description": "Invalid payload"}
+          "200": {
+            "description": "Created article",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid payload"
+          }
         }
       },
       "patch": {
-        "tags": ["Article"],
+        "tags": [
+          "Article"
+        ],
         "summary": "Update Article",
         "operationId": "updateArticle",
-        "parameters": [ {"name": "id", "in": "query", "required": true, "schema": {"type": "string", "format": "uuid"}} ],
-        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ArticleUpdate"}}}},
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ArticleUpdate"
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {"description": "Updated article", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Article"}}}},
-          "404": {"description": "Article not found"}
+          "200": {
+            "description": "Updated article",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Article not found"
+          }
         }
       },
       "delete": {
-        "tags": ["Article"],
+        "tags": [
+          "Article"
+        ],
         "summary": "Delete Article",
         "operationId": "deleteArticle",
-        "parameters": [ {"name": "id", "in": "query", "required": true, "schema": {"type": "string", "format": "uuid"}} ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
         "responses": {
-          "200": {"description": "Article deleted", "content": {"application/json": {"schema": {"type": "object", "properties": {"success": {"type": "boolean"}}}}}},
-          "404": {"description": "Article not found"}
+          "200": {
+            "description": "Article deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Article not found"
+          }
         }
       }
     },
     "/world/articles": {
       "post": {
-        "tags": ["Article"],
+        "tags": [
+          "Article"
+        ],
         "summary": "List Articles By World",
         "operationId": "listArticlesByWorld",
-        "parameters": [ {"name": "id", "in": "query", "required": true, "schema": {"type": "string", "format": "uuid"}} ],
-        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ListArticlesRequest"}}}},
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListArticlesRequest"
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {"description": "Paginated articles", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ListArticlesResponse"}}}},
-          "400": {"description": "Invalid parameters"}
+          "200": {
+            "description": "Paginated articles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListArticlesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters"
+          }
         }
       }
     }
   },
-  "security": [ {"UserAuthenticationToken": []}, {"ApplicationKey": []} ],
+  "security": [
+    {
+      "UserAuthenticationToken": []
+    },
+    {
+      "ApplicationKey": []
+    }
+  ],
   "components": {
     "securitySchemes": {
-      "ApplicationKey": {"type": "apiKey", "in": "header", "name": "x-api-key"},
-      "UserAuthenticationToken": {"type": "apiKey", "in": "header", "name": "x-auth-token"}
+      "ApplicationKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-api-key"
+      },
+      "UserAuthenticationToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-auth-token"
+      }
     },
     "schemas": {
-      "UpdateDate": {"type": "string", "format": "date-time"},
-      "UserRef": {"type": "object", "properties": {"id": {"type": "string", "format": "uuid"}, "username": {"type": "string"}}},
-      "WorldRef": {"type": "object", "properties": {"id": {"type": "string", "format": "uuid"}, "title": {"type": "string"}}},
-      "CategoryRef": {"type": "object", "properties": {"id": {"type": "string", "format": "uuid"}, "title": {"type": "string"}}},
-      "ImageRef": {"type": "object", "properties": {"id": {"type": "integer"}, "title": {"type": "string"}, "url": {"type": "string", "format": "uri"}}},
-      "ArticleBase": {"type": "object", "properties": {"id": {"type": "string", "format": "uuid"}, "title": {"type": "string"}, "slug": {"type": "string", "readOnly": true}, "state": {"type": "string", "enum": ["public", "private"]}, "templateType": {"type": "string", "enum": ["article"]}, "excerpt": {"type": "string"}, "tags": {"type": "string"}, "updateDate": {"$ref": "#/components/schemas/UpdateDate"}, "creationDate": {"$ref": "#/components/schemas/UpdateDate"}, "publicationDate": {"$ref": "#/components/schemas/UpdateDate"}, "author": {"$ref": "#/components/schemas/UserRef"}, "world": {"$ref": "#/components/schemas/WorldRef"}, "category": {"$ref": "#/components/schemas/CategoryRef"}, "cover": {"$ref": "#/components/schemas/ImageRef"}, "content": {"type": "string"}, "sidebarcontent": {"type": "string"}, "footnotes": {"type": "string"}, "authornotes": {"type": "string"}, "wordcount": {"type": "integer", "readOnly": true}, "views": {"type": "integer", "readOnly": true}, "url": {"type": "string", "format": "uri", "readOnly": true}, "isDraft": {"type": "boolean"}, "isWip": {"type": "boolean"}}},
-      "ArticleCreate": {"allOf": [ {"$ref": "#/components/schemas/ArticleBase"}, {"type": "object", "required": ["title", "templateType", "world"], "properties": {"title": {"type": "string"}, "world": {"$ref": "#/components/schemas/WorldRef"}}}]},
-      "ArticleUpdate": {"allOf": [ {"$ref": "#/components/schemas/ArticleBase"}, {"type": "object", "description": "All fields optional."}]},
-      "Article": {"allOf": [ {"$ref": "#/components/schemas/ArticleBase"} ]},
-      "ListArticlesRequest": {"type": "object", "required": ["limit", "offset"], "properties": {"limit": {"type": "integer", "minimum": 1, "maximum": 50, "default": 50}, "offset": {"type": "integer", "minimum": 0, "default": 0}, "category": {"type": "object", "properties": {"id": {"type": "string"}}}}},
-      "ListArticlesResponse": {"type": "object", "properties": {"success": {"type": "boolean"}, "entities": {"type": "array", "items": {"$ref": "#/components/schemas/Article"}}}}
+      "UpdateDate": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "UserRef": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "username": {
+            "type": "string"
+          }
+        }
+      },
+      "WorldRef": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "CategoryRef": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "ImageRef": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "ArticleBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string",
+            "readOnly": true
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "public",
+              "private"
+            ]
+          },
+          "templateType": {
+            "type": "string",
+            "description": "Type discriminator for article template variant."
+          },
+          "excerpt": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "string"
+          },
+          "updateDate": {
+            "$ref": "#/components/schemas/UpdateDate"
+          },
+          "creationDate": {
+            "$ref": "#/components/schemas/UpdateDate"
+          },
+          "publicationDate": {
+            "$ref": "#/components/schemas/UpdateDate"
+          },
+          "author": {
+            "$ref": "#/components/schemas/UserRef"
+          },
+          "world": {
+            "$ref": "#/components/schemas/WorldRef"
+          },
+          "category": {
+            "$ref": "#/components/schemas/CategoryRef"
+          },
+          "cover": {
+            "$ref": "#/components/schemas/ImageRef"
+          },
+          "content": {
+            "type": "string"
+          },
+          "sidebarcontent": {
+            "type": "string"
+          },
+          "footnotes": {
+            "type": "string"
+          },
+          "authornotes": {
+            "type": "string"
+          },
+          "wordcount": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "views": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          },
+          "isDraft": {
+            "type": "boolean"
+          },
+          "isWip": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TemplateCommonFields": {
+        "type": "object",
+        "description": "Fields commonly reused across specialized article templates.",
+        "properties": {
+          "timelineIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relatedArticleIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "secretIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      },
+      "ArticleGeneric": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "generic"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleLocation": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "location"
+              },
+              "coordinates": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "climate": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleSettlement": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "settlement"
+              },
+              "population": {
+                "type": "integer"
+              },
+              "governmentType": {
+                "type": "string"
+              },
+              "economy": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleOrganization": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "organization"
+              },
+              "leader": {
+                "type": "string"
+              },
+              "structure": {
+                "type": "string"
+              },
+              "goals": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticlePerson": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "person"
+              },
+              "birthDate": {
+                "type": "string"
+              },
+              "deathDate": {
+                "type": "string"
+              },
+              "age": {
+                "type": "integer"
+              },
+              "occupation": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleRank": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "rank"
+              },
+              "hierarchy": {
+                "type": "string"
+              },
+              "responsibilities": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleVehicle": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "vehicle"
+              },
+              "vehicleType": {
+                "type": "string"
+              },
+              "crew": {
+                "type": "integer"
+              },
+              "speed": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleTradition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "tradition"
+              },
+              "origin": {
+                "type": "string"
+              },
+              "rituals": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleReligion": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "religion"
+              },
+              "pantheon": {
+                "type": "string"
+              },
+              "tenets": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleDeity": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "deity"
+              },
+              "domain": {
+                "type": "string"
+              },
+              "symbol": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleItem": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "item"
+              },
+              "itemType": {
+                "type": "string"
+              },
+              "material": {
+                "type": "string"
+              },
+              "rarity": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleTechnology": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "technology"
+              },
+              "techLevel": {
+                "type": "string"
+              },
+              "principles": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleSpecies": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "species"
+              },
+              "classification": {
+                "type": "string"
+              },
+              "averageLifespan": {
+                "type": "integer"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleCreature": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "creature"
+              },
+              "habitat": {
+                "type": "string"
+              },
+              "diet": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleFlora": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "flora"
+              },
+              "growthRate": {
+                "type": "string"
+              },
+              "uses": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleFauna": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "fauna"
+              },
+              "behavior": {
+                "type": "string"
+              },
+              "predators": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleSpell": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "spell"
+              },
+              "school": {
+                "type": "string"
+              },
+              "level": {
+                "type": "integer"
+              },
+              "castingTime": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleMagic": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "magic"
+              },
+              "sources": {
+                "type": "string"
+              },
+              "limitations": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleMilitaryUnit": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "militaryUnit"
+              },
+              "unitType": {
+                "type": "string"
+              },
+              "commandStructure": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleBuilding": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "building"
+              },
+              "constructionDate": {
+                "type": "string"
+              },
+              "materials": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleStructure": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "structure"
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "architecture": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleProfession": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "profession"
+              },
+              "skills": {
+                "type": "string"
+              },
+              "tools": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleMyth": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "myth"
+              },
+              "origin": {
+                "type": "string"
+              },
+              "variations": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleLegend": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "legend"
+              },
+              "source": {
+                "type": "string"
+              },
+              "historicity": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleHistoricalEvent": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "historicalEvent"
+              },
+              "date": {
+                "type": "string"
+              },
+              "participants": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleTimelineEntry": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "timelineEntry"
+              },
+              "era": {
+                "type": "string"
+              },
+              "position": {
+                "type": "integer"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleGeography": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "geography"
+              },
+              "terrain": {
+                "type": "string"
+              },
+              "resources": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleLandform": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "landform"
+              },
+              "formation": {
+                "type": "string"
+              },
+              "dimensions": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleDocument": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "document"
+              },
+              "documentType": {
+                "type": "string"
+              },
+              "origin": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleManuscript": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "manuscript"
+              },
+              "status": {
+                "type": "string"
+              },
+              "chapters": {
+                "type": "integer"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleLaw": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "law"
+              },
+              "jurisdiction": {
+                "type": "string"
+              },
+              "penalties": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleLanguage": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "language"
+              },
+              "languageFamily": {
+                "type": "string"
+              },
+              "phonology": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleMaterial": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "material"
+              },
+              "properties": {
+                "type": "string"
+              },
+              "sources": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleCondition": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "condition"
+              },
+              "symptoms": {
+                "type": "string"
+              },
+              "treatment": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleDisease": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "disease"
+              },
+              "causes": {
+                "type": "string"
+              },
+              "prevention": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleFood": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "food"
+              },
+              "ingredients": {
+                "type": "string"
+              },
+              "preparation": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleCuisine": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "templateType": {
+                "type": "string",
+                "const": "cuisine"
+              },
+              "regionality": {
+                "type": "string"
+              },
+              "signatureDishes": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleCreate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "required": [
+              "title",
+              "templateType",
+              "world"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "world": {
+                "$ref": "#/components/schemas/WorldRef"
+              }
+            }
+          }
+        ]
+      },
+      "ArticleUpdate": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ArticleBase"
+          },
+          {
+            "type": "object",
+            "description": "All fields optional."
+          }
+        ]
+      },
+      "Article": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ArticleGeneric"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleLocation"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleSettlement"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleOrganization"
+          },
+          {
+            "$ref": "#/components/schemas/ArticlePerson"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleRank"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleVehicle"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleTradition"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleReligion"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleDeity"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleItem"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleTechnology"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleSpecies"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleCreature"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleFlora"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleFauna"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleSpell"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleMagic"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleMilitaryUnit"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleBuilding"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleStructure"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleProfession"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleMyth"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleLegend"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleHistoricalEvent"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleTimelineEntry"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleGeography"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleLandform"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleDocument"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleManuscript"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleLaw"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleLanguage"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleMaterial"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleCondition"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleDisease"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleFood"
+          },
+          {
+            "$ref": "#/components/schemas/ArticleCuisine"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "templateType",
+          "mapping": {
+            "generic": "#/components/schemas/ArticleGeneric",
+            "location": "#/components/schemas/ArticleLocation",
+            "settlement": "#/components/schemas/ArticleSettlement",
+            "organization": "#/components/schemas/ArticleOrganization",
+            "person": "#/components/schemas/ArticlePerson",
+            "rank": "#/components/schemas/ArticleRank",
+            "vehicle": "#/components/schemas/ArticleVehicle",
+            "tradition": "#/components/schemas/ArticleTradition",
+            "religion": "#/components/schemas/ArticleReligion",
+            "deity": "#/components/schemas/ArticleDeity",
+            "item": "#/components/schemas/ArticleItem",
+            "technology": "#/components/schemas/ArticleTechnology",
+            "species": "#/components/schemas/ArticleSpecies",
+            "creature": "#/components/schemas/ArticleCreature",
+            "flora": "#/components/schemas/ArticleFlora",
+            "fauna": "#/components/schemas/ArticleFauna",
+            "spell": "#/components/schemas/ArticleSpell",
+            "magic": "#/components/schemas/ArticleMagic",
+            "militaryUnit": "#/components/schemas/ArticleMilitaryUnit",
+            "building": "#/components/schemas/ArticleBuilding",
+            "structure": "#/components/schemas/ArticleStructure",
+            "profession": "#/components/schemas/ArticleProfession",
+            "myth": "#/components/schemas/ArticleMyth",
+            "legend": "#/components/schemas/ArticleLegend",
+            "historicalEvent": "#/components/schemas/ArticleHistoricalEvent",
+            "timelineEntry": "#/components/schemas/ArticleTimelineEntry",
+            "geography": "#/components/schemas/ArticleGeography",
+            "landform": "#/components/schemas/ArticleLandform",
+            "document": "#/components/schemas/ArticleDocument",
+            "manuscript": "#/components/schemas/ArticleManuscript",
+            "law": "#/components/schemas/ArticleLaw",
+            "language": "#/components/schemas/ArticleLanguage",
+            "material": "#/components/schemas/ArticleMaterial",
+            "condition": "#/components/schemas/ArticleCondition",
+            "disease": "#/components/schemas/ArticleDisease",
+            "food": "#/components/schemas/ArticleFood",
+            "cuisine": "#/components/schemas/ArticleCuisine"
+          }
+        }
+      },
+      "ListArticlesRequest": {
+        "type": "object",
+        "required": [
+          "limit",
+          "offset"
+        ],
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 50,
+            "default": 50
+          },
+          "offset": {
+            "type": "integer",
+            "minimum": 0,
+            "default": 0
+          },
+          "category": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ListArticlesResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "entities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Article"
+            }
+          }
+        }
+      }
     }
   }
 }
