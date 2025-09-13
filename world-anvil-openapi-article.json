@@ -1,0 +1,93 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "World Anvil Public API (Trimmed - Articles Only)",
+    "version": "2.0.0-trimmed",
+    "description": "Reduced specification containing only Article endpoints (GET/PUT/PATCH/DELETE /article and POST /world/articles)."
+  },
+  "servers": [
+    {"url": "https://www.worldanvil.com/api/external/boromir", "description": "Primary Server"}
+  ],
+  "tags": [ {"name": "Article"} ],
+  "paths": {
+    "/article": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Read Article",
+        "operationId": "readArticle",
+        "parameters": [
+          {"name": "id", "in": "query", "required": true, "schema": {"type": "string", "format": "uuid"}},
+          {"name": "granularity", "in": "query", "required": false, "schema": {"type": "integer", "enum": [-1,0,1,2,3], "default": 0}}
+        ],
+        "responses": {
+          "200": {"description": "Article resource", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Article"}}}},
+          "404": {"description": "Article not found"}
+        }
+      },
+      "put": {
+        "tags": ["Article"],
+        "summary": "Create Article",
+        "operationId": "createArticle",
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ArticleCreate"}}}},
+        "responses": {
+          "200": {"description": "Created article", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Article"}}}},
+          "400": {"description": "Invalid payload"}
+        }
+      },
+      "patch": {
+        "tags": ["Article"],
+        "summary": "Update Article",
+        "operationId": "updateArticle",
+        "parameters": [ {"name": "id", "in": "query", "required": true, "schema": {"type": "string", "format": "uuid"}} ],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ArticleUpdate"}}}},
+        "responses": {
+          "200": {"description": "Updated article", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Article"}}}},
+          "404": {"description": "Article not found"}
+        }
+      },
+      "delete": {
+        "tags": ["Article"],
+        "summary": "Delete Article",
+        "operationId": "deleteArticle",
+        "parameters": [ {"name": "id", "in": "query", "required": true, "schema": {"type": "string", "format": "uuid"}} ],
+        "responses": {
+          "200": {"description": "Article deleted", "content": {"application/json": {"schema": {"type": "object", "properties": {"success": {"type": "boolean"}}}}}},
+          "404": {"description": "Article not found"}
+        }
+      }
+    },
+    "/world/articles": {
+      "post": {
+        "tags": ["Article"],
+        "summary": "List Articles By World",
+        "operationId": "listArticlesByWorld",
+        "parameters": [ {"name": "id", "in": "query", "required": true, "schema": {"type": "string", "format": "uuid"}} ],
+        "requestBody": {"required": true, "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ListArticlesRequest"}}}},
+        "responses": {
+          "200": {"description": "Paginated articles", "content": {"application/json": {"schema": {"$ref": "#/components/schemas/ListArticlesResponse"}}}},
+          "400": {"description": "Invalid parameters"}
+        }
+      }
+    }
+  },
+  "security": [ {"UserAuthenticationToken": []}, {"ApplicationKey": []} ],
+  "components": {
+    "securitySchemes": {
+      "ApplicationKey": {"type": "apiKey", "in": "header", "name": "x-api-key"},
+      "UserAuthenticationToken": {"type": "apiKey", "in": "header", "name": "x-auth-token"}
+    },
+    "schemas": {
+      "UpdateDate": {"type": "string", "format": "date-time"},
+      "UserRef": {"type": "object", "properties": {"id": {"type": "string", "format": "uuid"}, "username": {"type": "string"}}},
+      "WorldRef": {"type": "object", "properties": {"id": {"type": "string", "format": "uuid"}, "title": {"type": "string"}}},
+      "CategoryRef": {"type": "object", "properties": {"id": {"type": "string", "format": "uuid"}, "title": {"type": "string"}}},
+      "ImageRef": {"type": "object", "properties": {"id": {"type": "integer"}, "title": {"type": "string"}, "url": {"type": "string", "format": "uri"}}},
+      "ArticleBase": {"type": "object", "properties": {"id": {"type": "string", "format": "uuid"}, "title": {"type": "string"}, "slug": {"type": "string", "readOnly": true}, "state": {"type": "string", "enum": ["public", "private"]}, "templateType": {"type": "string", "enum": ["article"]}, "excerpt": {"type": "string"}, "tags": {"type": "string"}, "updateDate": {"$ref": "#/components/schemas/UpdateDate"}, "creationDate": {"$ref": "#/components/schemas/UpdateDate"}, "publicationDate": {"$ref": "#/components/schemas/UpdateDate"}, "author": {"$ref": "#/components/schemas/UserRef"}, "world": {"$ref": "#/components/schemas/WorldRef"}, "category": {"$ref": "#/components/schemas/CategoryRef"}, "cover": {"$ref": "#/components/schemas/ImageRef"}, "content": {"type": "string"}, "sidebarcontent": {"type": "string"}, "footnotes": {"type": "string"}, "authornotes": {"type": "string"}, "wordcount": {"type": "integer", "readOnly": true}, "views": {"type": "integer", "readOnly": true}, "url": {"type": "string", "format": "uri", "readOnly": true}, "isDraft": {"type": "boolean"}, "isWip": {"type": "boolean"}}},
+      "ArticleCreate": {"allOf": [ {"$ref": "#/components/schemas/ArticleBase"}, {"type": "object", "required": ["title", "templateType", "world"], "properties": {"title": {"type": "string"}, "world": {"$ref": "#/components/schemas/WorldRef"}}}]},
+      "ArticleUpdate": {"allOf": [ {"$ref": "#/components/schemas/ArticleBase"}, {"type": "object", "description": "All fields optional."}]},
+      "Article": {"allOf": [ {"$ref": "#/components/schemas/ArticleBase"} ]},
+      "ListArticlesRequest": {"type": "object", "required": ["limit", "offset"], "properties": {"limit": {"type": "integer", "minimum": 1, "maximum": 50, "default": 50}, "offset": {"type": "integer", "minimum": 0, "default": 0}, "category": {"type": "object", "properties": {"id": {"type": "string"}}}}},
+      "ListArticlesResponse": {"type": "object", "properties": {"success": {"type": "boolean"}, "entities": {"type": "array", "items": {"$ref": "#/components/schemas/Article"}}}}
+    }
+  }
+}
